@@ -26,7 +26,6 @@ fi
 
 export VM_RELEASE
 
-echo VM_RELEASE=$VM_RELEASE
 
 confname=$VM_RELEASE
 
@@ -39,14 +38,11 @@ if [ "$VM_ARCH" = "arm64" ]; then
   VM_ARCH="aarch64"
 fi
 
-echo VM_ARCH="$VM_ARCH"
 
 if [ "$VM_ARCH" ]; then
   confname=$VM_RELEASE-$VM_ARCH
 fi
 
-
-echo "VM conf=$confname"
 #load the release conf
 if [ ! -e "conf/$confname.conf" ]; then
   echo "Can not find release conf: conf/$confname.conf"
@@ -59,13 +55,12 @@ fi
 . conf/$confname.conf
 
 
-echo "CONF_LINK=$CONF_LINK"
-
-
 #load the vm conf
 _conf_filename="$(echo "$CONF_LINK" | rev  | cut -d / -f 1 | rev)"
 
-echo "Builder conf: $_conf_filename"
+echo "VM_RELEASE=$VM_RELEASE; VM_ARCH=$VM_ARCH; confname=$confname; Builder config: $_conf_filename"
+
+# echo "CONF_LINK=$CONF_LINK"
 
 if [ ! -e "$_conf_filename" ]; then
   if ! wget -q "$CONF_LINK"; then
