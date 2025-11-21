@@ -111,7 +111,9 @@ async function setup(nat, mem, cpu) {
   }
   catch (error) {
     try {
+      core.startGroup("Show debug info for setup")
       await shell("bash run.sh showDebugInfo");
+      core.endGroup();
     } catch(ex){}
     core.setFailed(error.message);
     throw error;
@@ -191,7 +193,9 @@ async function main() {
   } catch (err) {
     error = err;
     try {
+      core.startGroup("Show debug info for main")
       await shell("bash run.sh showDebugInfo");
+      core.endGroup();
     } catch(ex){}
   } finally {
     core.endGroup();
