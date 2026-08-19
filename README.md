@@ -1,6 +1,6 @@
 # Run GitHub CI in FreeBSD 
 
-![Test](https://github.com/vmactions/freebsd-vm/workflows/Test/badge.svg)
+![Test](https://github.com/portsbuild-vm/freebsd-vm/workflows/Test/badge.svg)
 
 
 

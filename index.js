@@ -891,7 +891,7 @@ async function main() {
     // Fetch the runtime as a release asset of the pinned version, the same
     // matched-pair rule the VM images follow -- never a branch, never
     // releases/latest.
-    const anyvmUrl = `https://github.com/anyvm-org/anyvm/releases/download/v${anyvmVersion}/anyvm.py`;
+    const anyvmUrl = `https://github.com/portsbuild-vm/anyvm/releases/download/v${anyvmVersion}/anyvm.py`;
     const anyvmPath = path.join(__dirname, 'anyvm.py');
     // No raw-URL fallback on purpose: a pinned version whose release has no
     // anyvm.py asset is a bad pin, and quietly pulling the tag's raw file
