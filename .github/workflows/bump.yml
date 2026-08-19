@@ -33,12 +33,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           git switch main || (git fetch --all && git checkout -b main origin/main)
-          git clone https://github.com/vmactions/base-vm.git
+          git clone https://github.com/portsbuild-vm/base-vm.git
           python3 base-vm/bump.py --landed-out "${RUNNER_TEMP}/landed.txt"
 
       - name: Commit and push changes
         run: |
-          git config user.email "ghactions@vmactions.org"
+          git config user.email "ghactions@portsbuild.org"
           git config user.name "Bump.yml"
           git add conf
           if git diff --cached --quiet; then

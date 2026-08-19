@@ -77,7 +77,7 @@ jobs:
           } >> $GITHUB_ENV
 
       - name: Update the readme.md
-        uses: anyvm-org/template-render@v0.0.4
+        uses: portsbuild-vm/template-render@v0.0.4
         with:
           datafile: .github/data/datafile.ini
           files: |

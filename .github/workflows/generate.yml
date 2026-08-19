@@ -43,16 +43,16 @@ jobs:
           oldHash="$(cat .github/workflows/test.yml | grep -i "uses: ${{ github.repository }}" | head -1 | cut -d @ -f 2)"
           echo "OLD_HASH=${oldHash}" >> $GITHUB_ENV
 
-          git clone https://github.com/vmactions/base-vm.git
+          git clone https://github.com/portsbuild-vm/base-vm.git
 
           # Collect base-vm commit messages since last generate
           BASEVM_HASH_FILE=".github/data/base-vm-hash.txt"
           BASEVM_NEW_HASH="$(git -C base-vm rev-parse HEAD)"
           if [ -f "$BASEVM_HASH_FILE" ]; then
             BASEVM_OLD_HASH="$(cat "$BASEVM_HASH_FILE")"
-            BASEVM_LOG="$(git -C base-vm log --format="https://github.com/vmactions/base-vm/commit/%H %s" "${BASEVM_OLD_HASH}..${BASEVM_NEW_HASH}" 2>/dev/null || git -C base-vm log --format="https://github.com/vmactions/base-vm/commit/%H %s" -20)"
+            BASEVM_LOG="$(git -C base-vm log --format="https://github.com/portsbuild-vm/base-vm/commit/%H %s" "${BASEVM_OLD_HASH}..${BASEVM_NEW_HASH}" 2>/dev/null || git -C base-vm log --format="https://github.com/portsbuild-vm/base-vm/commit/%H %s" -20)"
           else
-            BASEVM_LOG="$(git -C base-vm log --format="https://github.com/vmactions/base-vm/commit/%H %s" -1)"
+            BASEVM_LOG="$(git -C base-vm log --format="https://github.com/portsbuild-vm/base-vm/commit/%H %s" -1)"
           fi
           echo "$BASEVM_NEW_HASH" > "$BASEVM_HASH_FILE"
 
@@ -97,7 +97,7 @@ jobs:
               echo "${base}: no BUILDER_VERSION, skip"
               continue
             fi
-            url="https://github.com/anyvm-org/${os}-builder/releases/download/v${bv}/releases.json"
+            url="https://github.com/portsbuild-vm/${os}-builder/releases/download/v${bv}/releases.json"
             idx="/tmp/relindex/${bv}.json"
             # Releases cut before the index asset existed (and old pins with
             # no tag at all, e.g. openbsd 7.2-7.6) 404 here. The step runs
@@ -244,7 +244,7 @@ jobs:
           done
 
       - name: Generate files
-        uses: anyvm-org/template-render@v0.0.4
+        uses: portsbuild-vm/template-render@v0.0.4
         with:
           datafile: .github/data/datafile.ini
           files: |
@@ -297,7 +297,7 @@ jobs:
             rm -f test.yml.back
             rm -rf base-vm
             #commit all changes and get new hash
-            git config  user.email "ghactions@vmactions.org"
+            git config  user.email "ghactions@portsbuild.org"
             git config  user.name "Generate.yml"
             git add .
             git commit -m "Generated from base-vm"
@@ -308,7 +308,7 @@ jobs:
           fi
       - name: Commit and push changes
         run: |
-          git config user.email "ghactions@vmactions.org"
+          git config user.email "ghactions@portsbuild.org"
           git config user.name "Generate.yml"
           git add \
             .github/workflows/readme.yml \

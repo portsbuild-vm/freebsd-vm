@@ -13,14 +13,14 @@ jobs:
       SEC_VBOX : ${{ vars.SEC_VBOX }}
     steps:
     - uses: actions/checkout@v7
-    - uses: vmactions/cf-tunnel@v0
+    - uses: portsbuild-vm/cf-tunnel@v0
       id: tunnel
       with:
         protocol: http
         port: 8000
     - name: Run vnc tunnel
       id: test
-      uses: vmactions/ngrok-tunnel@v0.0.1
+      uses: portsbuild-vm/ngrok-tunnel@v0.0.1
       with:
         protocol: tcp
         port: 5900

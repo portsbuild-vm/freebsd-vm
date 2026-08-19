@@ -40,8 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
-, ""]
+        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1", ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
         exclude:
@@ -269,7 +268,7 @@ jobs:
     - uses: actions/checkout@v7
 #    - name: Creating Web console
 #      if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'sshfs') }}
-#      uses: vmactions/cf-tunnel@v0
+#      uses: portsbuild-vm/cf-tunnel@v0
 #      id: tunnel
 #      with:
 #        protocol: http
@@ -278,7 +277,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'sshfs') }}
       id: test
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         envs: 'DEBUG MYTOKEN MYTOKEN2'
         prepare: |
@@ -377,8 +376,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
-, ""]
+        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1", ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
         exclude:
@@ -561,7 +559,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'nfs') }}
       id: test
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         envs: 'DEBUG MYTOKEN MYTOKEN2'
         prepare: |
@@ -661,8 +659,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
-, ""]
+        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1", ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
         exclude:
@@ -844,7 +841,7 @@ jobs:
     - uses: actions/checkout@v7
 #    - name: Creating Web console
 #      if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'scp') }}
-#      uses: vmactions/cf-tunnel@v0
+#      uses: portsbuild-vm/cf-tunnel@v0
 #      id: tunnel
 #      with:
 #        protocol: http
@@ -852,7 +849,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'scp') }}
       id: test
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         envs: 'DEBUG MYTOKEN MYTOKEN2'
         prepare: |
@@ -989,7 +986,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}', 'tar') }}
       id: test
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         mem: 4096
         debug: true
@@ -1056,7 +1053,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}', '9p') }}
       id: test
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         mem: 4096
         debug: true
@@ -1102,8 +1099,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
-, ""]
+        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1", ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
         disableCache: [ "", "true"]
@@ -1333,7 +1329,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'rsync') }}
       id: test
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         envs: 'MYTOKEN MYTOKEN2'
         prepare: |
@@ -1427,8 +1423,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
-, ""]
+        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1", ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
         exclude:
@@ -1657,7 +1652,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'rsync') }}
       id: test
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         envs: 'MYTOKEN MYTOKEN2'
         prepare: |
@@ -1719,7 +1714,7 @@ jobs:
 
     # File round-trip through the custom shell with sync rsync: a file created
     # on the host must be visible inside the VM, and a file created in the VM
-    # must come back to the host (vmactions/freebsd-vm#128). Skipped on Haiku:
+    # must come back to the host (portsbuild-vm/freebsd-vm#128). Skipped on Haiku:
     # its guest gets no GITHUB_WORKSPACE (SendEnv excluded), so the custom
     # shell does not run in the synced work tree.
     - name: Prepare custom shell sync test file on host
@@ -1790,7 +1785,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')['x86_64'], 'rsync') }}
       id: test
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         mem: 4096
         debug: true
@@ -1857,7 +1852,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs"],"aarch64":["rsync","scp","sshfs","nfs"],"riscv64":["nfs","scp"],"powerpc64":["nfs","scp"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')['x86_64'], 'rsync') }}
       id: test
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         mem: 4096
         debug: true
@@ -1940,7 +1935,7 @@ jobs:
     - name: Test in FreeBSD
       id: testerr
       continue-on-error: true
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         debug: true
         # A command that EXISTS and fails, rather than `false` or a made-up
@@ -1986,7 +1981,7 @@ jobs:
     - name: Test in FreeBSD
       id: testpass
       continue-on-error: true
-      uses: vmactions/freebsd-vm@5fae4aa4c732fb07946ad02bc2cbddc844749cec
+      uses: portsbuild-vm/freebsd-vm@main
       with:
         debug: true
         # No `true` and no double quotes: this body runs on every guest, and
