@@ -1,6 +1,6 @@
 {
   "name": "portsbuild-vm-FreeBSD",
-  "version": "",
+  "version": "0.1.0",
   "description": "GitHub actions for FreeBSD",
   "type": "module",
   "main": "index.js",

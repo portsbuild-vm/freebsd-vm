@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
+        release: [ "14.4", "15.0", "15.1"
 , ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
@@ -64,104 +64,6 @@ jobs:
           - runs: "ubuntu-24.04-arm"
             arch: "armv7"
           # Manual matrix excludes only; combos with no conf are auto-excluded.
-          - release: "13.2"
-            arch: sparc64
-          - release: "13.2"
-            arch: ppc64le
-          - release: "13.2"
-            arch: s390x
-          - release: "13.2"
-            arch: i386
-          - release: "13.2"
-            arch: loongarch64
-          - release: "13.2"
-            arch: armv7
-          - release: "13.3"
-            arch: sparc64
-          - release: "13.3"
-            arch: ppc64le
-          - release: "13.3"
-            arch: s390x
-          - release: "13.3"
-            arch: i386
-          - release: "13.3"
-            arch: loongarch64
-          - release: "13.3"
-            arch: armv7
-          - release: "13.4"
-            arch: riscv64
-          - release: "13.4"
-            arch: sparc64
-          - release: "13.4"
-            arch: ppc64le
-          - release: "13.4"
-            arch: s390x
-          - release: "13.4"
-            arch: i386
-          - release: "13.4"
-            arch: loongarch64
-          - release: "13.4"
-            arch: armv7
-          - release: "13.5"
-            arch: sparc64
-          - release: "13.5"
-            arch: ppc64le
-          - release: "13.5"
-            arch: s390x
-          - release: "13.5"
-            arch: i386
-          - release: "13.5"
-            arch: loongarch64
-          - release: "13.5"
-            arch: armv7
-          - release: "14.0"
-            arch: sparc64
-          - release: "14.0"
-            arch: ppc64le
-          - release: "14.0"
-            arch: s390x
-          - release: "14.0"
-            arch: i386
-          - release: "14.0"
-            arch: loongarch64
-          - release: "14.0"
-            arch: armv7
-          - release: "14.1"
-            arch: sparc64
-          - release: "14.1"
-            arch: ppc64le
-          - release: "14.1"
-            arch: s390x
-          - release: "14.1"
-            arch: i386
-          - release: "14.1"
-            arch: loongarch64
-          - release: "14.1"
-            arch: armv7
-          - release: "14.2"
-            arch: sparc64
-          - release: "14.2"
-            arch: ppc64le
-          - release: "14.2"
-            arch: s390x
-          - release: "14.2"
-            arch: i386
-          - release: "14.2"
-            arch: loongarch64
-          - release: "14.2"
-            arch: armv7
-          - release: "14.3"
-            arch: sparc64
-          - release: "14.3"
-            arch: ppc64le
-          - release: "14.3"
-            arch: s390x
-          - release: "14.3"
-            arch: i386
-          - release: "14.3"
-            arch: loongarch64
-          - release: "14.3"
-            arch: armv7
           - release: "14.4"
             arch: sparc64
           - release: "14.4"
@@ -210,36 +112,6 @@ jobs:
             arch: loongarch64
           - release: ""
             arch: armv7
-          - release: "13.2"
-            arch: "riscv64"
-          - release: "13.2"
-            arch: "powerpc64"
-          - release: "13.3"
-            arch: "riscv64"
-          - release: "13.3"
-            arch: "powerpc64"
-          - release: "13.4"
-            arch: "powerpc64"
-          - release: "13.5"
-            arch: "riscv64"
-          - release: "13.5"
-            arch: "powerpc64"
-          - release: "14.0"
-            arch: "riscv64"
-          - release: "14.0"
-            arch: "powerpc64"
-          - release: "14.1"
-            arch: "riscv64"
-          - release: "14.1"
-            arch: "powerpc64"
-          - release: "14.2"
-            arch: "riscv64"
-          - release: "14.2"
-            arch: "powerpc64"
-          - release: "14.3"
-            arch: "riscv64"
-          - release: "14.3"
-            arch: "powerpc64"
           - release: "14.4"
             arch: "riscv64"
           - release: "14.4"
@@ -278,7 +150,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["nfs","scp","tar"],"powerpc64":["nfs","scp","tar"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'sshfs') }}
       id: test
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         envs: 'DEBUG MYTOKEN MYTOKEN2'
         prepare: |
@@ -377,7 +249,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
+        release: [ "14.4", "15.0", "15.1"
 , ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
@@ -401,104 +273,6 @@ jobs:
           - runs: "ubuntu-24.04-arm"
             arch: "armv7"
           # Manual matrix excludes only; combos with no conf are auto-excluded.
-          - release: "13.2"
-            arch: sparc64
-          - release: "13.2"
-            arch: ppc64le
-          - release: "13.2"
-            arch: s390x
-          - release: "13.2"
-            arch: i386
-          - release: "13.2"
-            arch: loongarch64
-          - release: "13.2"
-            arch: armv7
-          - release: "13.3"
-            arch: sparc64
-          - release: "13.3"
-            arch: ppc64le
-          - release: "13.3"
-            arch: s390x
-          - release: "13.3"
-            arch: i386
-          - release: "13.3"
-            arch: loongarch64
-          - release: "13.3"
-            arch: armv7
-          - release: "13.4"
-            arch: riscv64
-          - release: "13.4"
-            arch: sparc64
-          - release: "13.4"
-            arch: ppc64le
-          - release: "13.4"
-            arch: s390x
-          - release: "13.4"
-            arch: i386
-          - release: "13.4"
-            arch: loongarch64
-          - release: "13.4"
-            arch: armv7
-          - release: "13.5"
-            arch: sparc64
-          - release: "13.5"
-            arch: ppc64le
-          - release: "13.5"
-            arch: s390x
-          - release: "13.5"
-            arch: i386
-          - release: "13.5"
-            arch: loongarch64
-          - release: "13.5"
-            arch: armv7
-          - release: "14.0"
-            arch: sparc64
-          - release: "14.0"
-            arch: ppc64le
-          - release: "14.0"
-            arch: s390x
-          - release: "14.0"
-            arch: i386
-          - release: "14.0"
-            arch: loongarch64
-          - release: "14.0"
-            arch: armv7
-          - release: "14.1"
-            arch: sparc64
-          - release: "14.1"
-            arch: ppc64le
-          - release: "14.1"
-            arch: s390x
-          - release: "14.1"
-            arch: i386
-          - release: "14.1"
-            arch: loongarch64
-          - release: "14.1"
-            arch: armv7
-          - release: "14.2"
-            arch: sparc64
-          - release: "14.2"
-            arch: ppc64le
-          - release: "14.2"
-            arch: s390x
-          - release: "14.2"
-            arch: i386
-          - release: "14.2"
-            arch: loongarch64
-          - release: "14.2"
-            arch: armv7
-          - release: "14.3"
-            arch: sparc64
-          - release: "14.3"
-            arch: ppc64le
-          - release: "14.3"
-            arch: s390x
-          - release: "14.3"
-            arch: i386
-          - release: "14.3"
-            arch: loongarch64
-          - release: "14.3"
-            arch: armv7
           - release: "14.4"
             arch: sparc64
           - release: "14.4"
@@ -561,7 +335,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["nfs","scp","tar"],"powerpc64":["nfs","scp","tar"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'nfs') }}
       id: test
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         envs: 'DEBUG MYTOKEN MYTOKEN2'
         prepare: |
@@ -661,7 +435,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
+        release: [ "14.4", "15.0", "15.1"
 , ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
@@ -685,104 +459,6 @@ jobs:
           - runs: "ubuntu-24.04-arm"
             arch: "armv7"
           # Manual matrix excludes only; combos with no conf are auto-excluded.
-          - release: "13.2"
-            arch: sparc64
-          - release: "13.2"
-            arch: ppc64le
-          - release: "13.2"
-            arch: s390x
-          - release: "13.2"
-            arch: i386
-          - release: "13.2"
-            arch: loongarch64
-          - release: "13.2"
-            arch: armv7
-          - release: "13.3"
-            arch: sparc64
-          - release: "13.3"
-            arch: ppc64le
-          - release: "13.3"
-            arch: s390x
-          - release: "13.3"
-            arch: i386
-          - release: "13.3"
-            arch: loongarch64
-          - release: "13.3"
-            arch: armv7
-          - release: "13.4"
-            arch: riscv64
-          - release: "13.4"
-            arch: sparc64
-          - release: "13.4"
-            arch: ppc64le
-          - release: "13.4"
-            arch: s390x
-          - release: "13.4"
-            arch: i386
-          - release: "13.4"
-            arch: loongarch64
-          - release: "13.4"
-            arch: armv7
-          - release: "13.5"
-            arch: sparc64
-          - release: "13.5"
-            arch: ppc64le
-          - release: "13.5"
-            arch: s390x
-          - release: "13.5"
-            arch: i386
-          - release: "13.5"
-            arch: loongarch64
-          - release: "13.5"
-            arch: armv7
-          - release: "14.0"
-            arch: sparc64
-          - release: "14.0"
-            arch: ppc64le
-          - release: "14.0"
-            arch: s390x
-          - release: "14.0"
-            arch: i386
-          - release: "14.0"
-            arch: loongarch64
-          - release: "14.0"
-            arch: armv7
-          - release: "14.1"
-            arch: sparc64
-          - release: "14.1"
-            arch: ppc64le
-          - release: "14.1"
-            arch: s390x
-          - release: "14.1"
-            arch: i386
-          - release: "14.1"
-            arch: loongarch64
-          - release: "14.1"
-            arch: armv7
-          - release: "14.2"
-            arch: sparc64
-          - release: "14.2"
-            arch: ppc64le
-          - release: "14.2"
-            arch: s390x
-          - release: "14.2"
-            arch: i386
-          - release: "14.2"
-            arch: loongarch64
-          - release: "14.2"
-            arch: armv7
-          - release: "14.3"
-            arch: sparc64
-          - release: "14.3"
-            arch: ppc64le
-          - release: "14.3"
-            arch: s390x
-          - release: "14.3"
-            arch: i386
-          - release: "14.3"
-            arch: loongarch64
-          - release: "14.3"
-            arch: armv7
           - release: "14.4"
             arch: sparc64
           - release: "14.4"
@@ -852,7 +528,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["nfs","scp","tar"],"powerpc64":["nfs","scp","tar"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'scp') }}
       id: test
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         envs: 'DEBUG MYTOKEN MYTOKEN2'
         prepare: |
@@ -989,7 +665,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["nfs","scp","tar"],"powerpc64":["nfs","scp","tar"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}', 'tar') }}
       id: test
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         mem: 4096
         debug: true
@@ -1056,7 +732,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["nfs","scp","tar"],"powerpc64":["nfs","scp","tar"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}', '9p') }}
       id: test
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         mem: 4096
         debug: true
@@ -1102,7 +778,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
+        release: [ "14.4", "15.0", "15.1"
 , ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
@@ -1127,104 +803,6 @@ jobs:
           - runs: "ubuntu-24.04-arm"
             arch: "armv7"
           # Manual matrix excludes only; combos with no conf are auto-excluded.
-          - release: "13.2"
-            arch: sparc64
-          - release: "13.2"
-            arch: ppc64le
-          - release: "13.2"
-            arch: s390x
-          - release: "13.2"
-            arch: i386
-          - release: "13.2"
-            arch: loongarch64
-          - release: "13.2"
-            arch: armv7
-          - release: "13.3"
-            arch: sparc64
-          - release: "13.3"
-            arch: ppc64le
-          - release: "13.3"
-            arch: s390x
-          - release: "13.3"
-            arch: i386
-          - release: "13.3"
-            arch: loongarch64
-          - release: "13.3"
-            arch: armv7
-          - release: "13.4"
-            arch: riscv64
-          - release: "13.4"
-            arch: sparc64
-          - release: "13.4"
-            arch: ppc64le
-          - release: "13.4"
-            arch: s390x
-          - release: "13.4"
-            arch: i386
-          - release: "13.4"
-            arch: loongarch64
-          - release: "13.4"
-            arch: armv7
-          - release: "13.5"
-            arch: sparc64
-          - release: "13.5"
-            arch: ppc64le
-          - release: "13.5"
-            arch: s390x
-          - release: "13.5"
-            arch: i386
-          - release: "13.5"
-            arch: loongarch64
-          - release: "13.5"
-            arch: armv7
-          - release: "14.0"
-            arch: sparc64
-          - release: "14.0"
-            arch: ppc64le
-          - release: "14.0"
-            arch: s390x
-          - release: "14.0"
-            arch: i386
-          - release: "14.0"
-            arch: loongarch64
-          - release: "14.0"
-            arch: armv7
-          - release: "14.1"
-            arch: sparc64
-          - release: "14.1"
-            arch: ppc64le
-          - release: "14.1"
-            arch: s390x
-          - release: "14.1"
-            arch: i386
-          - release: "14.1"
-            arch: loongarch64
-          - release: "14.1"
-            arch: armv7
-          - release: "14.2"
-            arch: sparc64
-          - release: "14.2"
-            arch: ppc64le
-          - release: "14.2"
-            arch: s390x
-          - release: "14.2"
-            arch: i386
-          - release: "14.2"
-            arch: loongarch64
-          - release: "14.2"
-            arch: armv7
-          - release: "14.3"
-            arch: sparc64
-          - release: "14.3"
-            arch: ppc64le
-          - release: "14.3"
-            arch: s390x
-          - release: "14.3"
-            arch: i386
-          - release: "14.3"
-            arch: loongarch64
-          - release: "14.3"
-            arch: armv7
           - release: "14.4"
             arch: sparc64
           - release: "14.4"
@@ -1273,36 +851,6 @@ jobs:
             arch: loongarch64
           - release: ""
             arch: armv7
-          - release: "13.2"
-            arch: "riscv64"
-          - release: "13.2"
-            arch: "powerpc64"
-          - release: "13.3"
-            arch: "riscv64"
-          - release: "13.3"
-            arch: "powerpc64"
-          - release: "13.4"
-            arch: "powerpc64"
-          - release: "13.5"
-            arch: "riscv64"
-          - release: "13.5"
-            arch: "powerpc64"
-          - release: "14.0"
-            arch: "riscv64"
-          - release: "14.0"
-            arch: "powerpc64"
-          - release: "14.1"
-            arch: "riscv64"
-          - release: "14.1"
-            arch: "powerpc64"
-          - release: "14.2"
-            arch: "riscv64"
-          - release: "14.2"
-            arch: "powerpc64"
-          - release: "14.3"
-            arch: "riscv64"
-          - release: "14.3"
-            arch: "powerpc64"
           - release: "14.4"
             arch: "riscv64"
           - release: "14.4"
@@ -1333,7 +881,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["nfs","scp","tar"],"powerpc64":["nfs","scp","tar"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'rsync') }}
       id: test
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         envs: 'MYTOKEN MYTOKEN2'
         prepare: |
@@ -1427,7 +975,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [ "13.2", "13.3", "13.4", "13.5", "14.0", "14.1", "14.2", "14.3", "14.4", "15.0", "15.1"
+        release: [ "14.4", "15.0", "15.1"
 , ""]
         arch: [ "aarch64", "", "riscv64", "powerpc64", "sparc64", "ppc64le", "s390x", "i386", "loongarch64", "armv7"]
         runs: [ "ubuntu-24.04", "ubuntu-24.04-arm"]
@@ -1451,104 +999,6 @@ jobs:
           - runs: "ubuntu-24.04-arm"
             arch: "armv7"
           # Manual matrix excludes only; combos with no conf are auto-excluded.
-          - release: "13.2"
-            arch: sparc64
-          - release: "13.2"
-            arch: ppc64le
-          - release: "13.2"
-            arch: s390x
-          - release: "13.2"
-            arch: i386
-          - release: "13.2"
-            arch: loongarch64
-          - release: "13.2"
-            arch: armv7
-          - release: "13.3"
-            arch: sparc64
-          - release: "13.3"
-            arch: ppc64le
-          - release: "13.3"
-            arch: s390x
-          - release: "13.3"
-            arch: i386
-          - release: "13.3"
-            arch: loongarch64
-          - release: "13.3"
-            arch: armv7
-          - release: "13.4"
-            arch: riscv64
-          - release: "13.4"
-            arch: sparc64
-          - release: "13.4"
-            arch: ppc64le
-          - release: "13.4"
-            arch: s390x
-          - release: "13.4"
-            arch: i386
-          - release: "13.4"
-            arch: loongarch64
-          - release: "13.4"
-            arch: armv7
-          - release: "13.5"
-            arch: sparc64
-          - release: "13.5"
-            arch: ppc64le
-          - release: "13.5"
-            arch: s390x
-          - release: "13.5"
-            arch: i386
-          - release: "13.5"
-            arch: loongarch64
-          - release: "13.5"
-            arch: armv7
-          - release: "14.0"
-            arch: sparc64
-          - release: "14.0"
-            arch: ppc64le
-          - release: "14.0"
-            arch: s390x
-          - release: "14.0"
-            arch: i386
-          - release: "14.0"
-            arch: loongarch64
-          - release: "14.0"
-            arch: armv7
-          - release: "14.1"
-            arch: sparc64
-          - release: "14.1"
-            arch: ppc64le
-          - release: "14.1"
-            arch: s390x
-          - release: "14.1"
-            arch: i386
-          - release: "14.1"
-            arch: loongarch64
-          - release: "14.1"
-            arch: armv7
-          - release: "14.2"
-            arch: sparc64
-          - release: "14.2"
-            arch: ppc64le
-          - release: "14.2"
-            arch: s390x
-          - release: "14.2"
-            arch: i386
-          - release: "14.2"
-            arch: loongarch64
-          - release: "14.2"
-            arch: armv7
-          - release: "14.3"
-            arch: sparc64
-          - release: "14.3"
-            arch: ppc64le
-          - release: "14.3"
-            arch: s390x
-          - release: "14.3"
-            arch: i386
-          - release: "14.3"
-            arch: loongarch64
-          - release: "14.3"
-            arch: armv7
           - release: "14.4"
             arch: sparc64
           - release: "14.4"
@@ -1597,36 +1047,6 @@ jobs:
             arch: loongarch64
           - release: ""
             arch: armv7
-          - release: "13.2"
-            arch: "riscv64"
-          - release: "13.2"
-            arch: "powerpc64"
-          - release: "13.3"
-            arch: "riscv64"
-          - release: "13.3"
-            arch: "powerpc64"
-          - release: "13.4"
-            arch: "powerpc64"
-          - release: "13.5"
-            arch: "riscv64"
-          - release: "13.5"
-            arch: "powerpc64"
-          - release: "14.0"
-            arch: "riscv64"
-          - release: "14.0"
-            arch: "powerpc64"
-          - release: "14.1"
-            arch: "riscv64"
-          - release: "14.1"
-            arch: "powerpc64"
-          - release: "14.2"
-            arch: "riscv64"
-          - release: "14.2"
-            arch: "powerpc64"
-          - release: "14.3"
-            arch: "riscv64"
-          - release: "14.3"
-            arch: "powerpc64"
           - release: "14.4"
             arch: "riscv64"
           - release: "14.4"
@@ -1657,7 +1077,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["nfs","scp","tar"],"powerpc64":["nfs","scp","tar"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'rsync') }}
       id: test
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         envs: 'MYTOKEN MYTOKEN2'
         prepare: |
@@ -1790,7 +1210,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["nfs","scp","tar"],"powerpc64":["nfs","scp","tar"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')['x86_64'], 'rsync') }}
       id: test
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         mem: 4096
         debug: true
@@ -1857,7 +1277,7 @@ jobs:
     - name: Test in FreeBSD
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["nfs","scp","tar"],"powerpc64":["nfs","scp","tar"],"sparc64":[],"ppc64le":[],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')['x86_64'], 'rsync') }}
       id: test
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         mem: 4096
         debug: true
@@ -1940,7 +1360,7 @@ jobs:
     - name: Test in FreeBSD
       id: testerr
       continue-on-error: true
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         debug: true
         # A command that EXISTS and fails, rather than `false` or a made-up
@@ -1986,7 +1406,7 @@ jobs:
     - name: Test in FreeBSD
       id: testpass
       continue-on-error: true
-      uses: portsbuild-vm/freebsd-vm@b04cfaa466f2ea0bca2086897087958083e832fe
+      uses: portsbuild-vm/freebsd-vm@477b7ba1e078650a81cea6d075261438bd4223cb
       with:
         debug: true
         # No `true` and no double quotes: this body runs on every guest, and
