@@ -31,7 +31,7 @@ jobs:
         echo "====================================="
         echo "====================================="
 
-    - uses: portsbuild-vm/debugger-action@master
+    - uses: neilpang/debugger-action@master
 
 
 
