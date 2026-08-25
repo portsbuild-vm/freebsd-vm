@@ -107,7 +107,7 @@ jobs:
 ```
 
 
-The latest major version is: `v0`, which is the most recommended to use. (You can also use the latest full version: `v0.1.0`)  
+The latest major version is: `v0`, which is the most recommended to use. (You can also use the latest full version: `v0.1.1`)  
 
 
 If you are migrating from the previous `v0`, please change the `runs-on: ` to `runs-on: ubuntu-latest`
