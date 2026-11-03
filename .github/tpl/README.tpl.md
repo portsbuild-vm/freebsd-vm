@@ -80,7 +80,7 @@ The `prepare` and `run` scripts are always executed with `sh` in the VM, whateve
 
 ## 2. Share code
 
-The code is shared from the host to the VM via `rsync` by default, you can choose to use `sshfs` or `nfs` or `scp` to share code instead.
+The code is shared from the host to the VM via the first sync method listed for your release and architecture in the table above (`rsync` for most of them), you can choose to use `sshfs` or `nfs` or `scp` to share code instead.
 
 
 ```yaml
@@ -121,6 +121,9 @@ When using a copy based sync method (`rsync`, `scp`, `tar` or `9p`), you can def
 
 
 ```
+
+
+With `sync: nfs` the workspace is a mount of the runner's directory, and every user in the VM, root included, is mapped to the runner's user on the host (GNU Hurd excepted). So `chown` / `chgrp` on files in the workspace fail with `Operation not permitted`, and so does `tar -x` as root on an archive that stores another owner (e.g. `uid 0`), because it tries to restore that owner. Use a copy based method (`rsync`, `scp` or `tar`), which puts the files on the VM's own disk, or extract with `tar --no-same-owner`.
 
 
 {{VM_SYNC_COMMENTS}}
@@ -317,9 +320,32 @@ The `prepare` step (installing packages etc.) normally runs on every build. With
 ...
 ```
 
+That is all `cache-after-prepare` needs. The `cache-after-prepare-key-suffix` option below is **optional**; leave it out unless you need it.
+
+The cache key only covers the `prepare` text itself. When `prepare` runs a script from your repository, a change to that script would not rebuild the prepared image. The optional `cache-after-prepare-key-suffix` covers that case: its value is appended to the cache key, so a different value means a different cache. It can be a fixed string you bump by hand (`cache-after-prepare-key-suffix: v2`), or a hash of the files `prepare` depends on:
+
+```yml
+...
+    steps:
+    - uses: actions/checkout@v7
+    - name: Test
+      id: test
+      uses: {{GITHUB_REPOSITORY}}@{{LATEST_MAJOR}}
+      with:
+        cache-after-prepare: true
+        cache-after-prepare-key-suffix: deps-${{ hashFiles('ci/install-deps.sh') }}
+        prepare: |
+          sh ci/install-deps.sh
+        run: |
+          ...
+...
+```
+
+`hashFiles()` is evaluated on the runner, relative to the workspace, so the checkout must come first. It returns an empty string when no file matches, and the key then no longer follows the file, so double-check the path.
+
 Notes:
 
-- The cache key includes a hash of the `prepare` script and the `sync` method, so changing either of them rebuilds the prepared image from the base image.
+- The cache key includes a hash of the `prepare` script and the `sync` method, so changing either of them rebuilds the prepared image from the base image. `cache-after-prepare-key-suffix` is optional and empty by default; when set, its value is appended to the key.
 - The source tree is still synchronized into the VM on every run; only the `prepare` step is skipped.
 - The first run (or any run after `prepare` changes) takes longer: the VM is shut down after `prepare`, the prepared image is cached, and the VM boots again before `run`.
 - The action output `cache-after-prepare-hit` is `true` when a prepared image was restored and `prepare` was skipped.

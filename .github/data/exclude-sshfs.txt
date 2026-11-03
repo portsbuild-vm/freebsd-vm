@@ -10,7 +10,3 @@
             arch: "riscv64"
           - release: "15.1"
             arch: "powerpc64"
-          - release: ""
-            arch: "riscv64"
-          - release: ""
-            arch: "powerpc64"
